@@ -1,0 +1,38 @@
+.main {
+    height: 87vh;
+}
+
+.container-contacts {
+    padding-top: 40px;
+    margin: auto;
+    border-radius: 5px;
+    max-width: 460px;
+    height: 600px;
+}
+
+.container-contact {
+    border: 1px solid black ;
+    border-radius: 5px;
+    margin: 10px;
+    background: whitesmoke;
+}
+
+.number {
+    border-bottom: 1px solid black;
+    width: 180px;
+    margin: 10px;
+    height: 30px;
+    display: inline-block;
+}
+
+.phone {
+    border-bottom: 1px solid black;
+    width: 180px;
+    margin: 10px;
+    height: 30px;
+    display: inline-block;
+}
+
+.edit {
+
+}
