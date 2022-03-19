@@ -13,6 +13,7 @@ function App() {
     }
     const [state, setState] = useState(data)
     const [showModal, setShowModal] = useState(false)
+    const [deleteModalWindow, setDeleteModalWindow] = useState(false)
     const [valueName, setValueName] =useState('')
     const [valueNumber, setValueNumber] =useState('')
 
@@ -28,6 +29,7 @@ function App() {
         const filterContacts = oldState.contacts.filter(contact => contact.id !== id)
         const newContacts = {contacts: [...filterContacts]}
         setState(newContacts)
+        setDeleteModalWindow(false)
     }
 
     return (
@@ -42,6 +44,8 @@ function App() {
         <Main
             contacts={state.contacts}
             deleteContactHandle={deleteContactHandle}
+            setDeleteModalWindow={() => setDeleteModalWindow(true)}
+            deleteModalWindow={deleteModalWindow}
         />
     </div>
   );

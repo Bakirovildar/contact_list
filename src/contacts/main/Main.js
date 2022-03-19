@@ -1,12 +1,33 @@
-import React from "react";
+import React, {useState} from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './Main.css'
+import MyButton from "../../component/myButton/MyButton";
 
-const Main = ({contacts, deleteContactHandle}) => {
+const Main = ({contacts, deleteContactHandle,setDeleteModalWindow, deleteModalWindow}) => {
+
+    const [idDelete, setIdDelete] = useState()
+
+    const clickDeleteModal = (id) => {
+        setDeleteModalWindow()
+        setIdDelete(id)
+    }
+
     return (
         <div className='main'>
             <div className='container-contacts'>
+                {
+                    deleteModalWindow === true
+                        ?<div className='deleteModal'>
+                            <MyButton
+                                title='Удалить'
+                                cls='cancel'
+                                onClick={() => deleteContactHandle(idDelete)}
+                            />
+                            <MyButton title='Отмена' cls='add'/>
+                        </div>
+                        : ''
+                }
                 {contacts.map(contact => {
                     return (
                         <div
@@ -19,7 +40,7 @@ const Main = ({contacts, deleteContactHandle}) => {
                                 <EditIcon className='edit'/>
                                 <DeleteIcon
                                     className='delete'
-                                    onClick={() => deleteContactHandle(contact.id)}
+                                    onClick={() => clickDeleteModal(contact.id)}
                                 />
                             </div>
                         </div>

@@ -18,6 +18,19 @@
     background: whitesmoke;
 }
 
+.deleteModal {
+    border: 1px solid grey;
+    padding: 40px;
+    border-radius: 15px;
+    background: whitesmoke;
+    width: 400px;
+    margin: auto;
+    align-items: center;
+    height: 150px;
+    z-index: 10;
+    position: fixed;
+}
+
 .number {
     border-bottom: 1px solid black;
     width: 180px;
