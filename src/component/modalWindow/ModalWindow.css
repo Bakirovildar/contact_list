@@ -1,0 +1,18 @@
+.modalWindow {
+    border: 1px solid grey;
+    padding: 40px;
+    border-radius: 15px;
+    background: whitesmoke;
+    width: 400px;
+    margin: auto;
+    align-items: center;
+    height: 400px;
+    z-index: 10;
+    position: relative;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+}
