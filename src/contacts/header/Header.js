@@ -3,13 +3,14 @@ import './Header.css'
 import MyButton from "../../component/myButton/MyButton";
 import ModalWindow from "../../component/modalWindow/ModalWindow";
 
-const Header = ({showModal, setShowModal, numberValue, nameValue, addNewContactHandle}) => {
+const Header = ({isNew, showModal, setShowModal, numberValue, nameValue, addNewContactHandle}) => {
 
     return (
         <div className='header'>
             {showModal === true
                 ? <div className='modalWind'>
                     <ModalWindow
+                        isNew={isNew}
                         offShowModalWindow={setShowModal}
                         nameValue={nameValue}
                         numberValue={numberValue}

@@ -14,6 +14,7 @@ function App() {
     const [state, setState] = useState(data)
     const [showModal, setShowModal] = useState(false)
     const [deleteModalWindow, setDeleteModalWindow] = useState(false)
+    const [isNew, setIsNew] = useState(true)
     const [valueName, setValueName] =useState('')
     const [valueNumber, setValueNumber] =useState('')
 
@@ -32,13 +33,25 @@ function App() {
         setDeleteModalWindow(false)
     }
 
+    const addContactShowModal = () => {
+        setShowModal(!showModal)
+        setIsNew(false)
+    }
+
+    const showEditModalWindow = (id) => {
+        setShowModal(!showModal)
+        setIsNew(true)
+
+    }
+
     return (
     <div className="App">
         <Header
             numberValue={(value) => setValueNumber(value)}
             nameValue={(value) => setValueName(value)}
             addNewContactHandle={addNewContactHandle}
-            setShowModal={() => setShowModal(!showModal)}
+            setShowModal={addContactShowModal}
+            isNew={isNew}
             showModal={showModal}
         />
         <Main
@@ -46,6 +59,7 @@ function App() {
             deleteContactHandle={deleteContactHandle}
             setDeleteModalWindow={() => setDeleteModalWindow(!deleteModalWindow)}
             deleteModalWindow={deleteModalWindow}
+            showEditModalWindow={showEditModalWindow}
         />
     </div>
   );
