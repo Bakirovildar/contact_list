@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import './Main.css'
 import MyButton from "../../component/myButton/MyButton";
 
-const Main = ({contacts, deleteContactHandle,setDeleteModalWindow, deleteModalWindow}) => {
+const Main = ({contacts, deleteContactHandle, setDeleteModalWindow, deleteModalWindow}) => {
 
     const [idDelete, setIdDelete] = useState()
 
@@ -18,13 +18,17 @@ const Main = ({contacts, deleteContactHandle,setDeleteModalWindow, deleteModalWi
             <div className='container-contacts'>
                 {
                     deleteModalWindow === true
-                        ?<div className='deleteModal'>
+                        ? <div className='deleteModal'>
                             <MyButton
                                 title='Удалить'
                                 cls='cancel'
                                 onClick={() => deleteContactHandle(idDelete)}
                             />
-                            <MyButton title='Отмена' cls='add'/>
+                            <MyButton
+                                title='Отмена'
+                                cls='add'
+                                onClick={() => setDeleteModalWindow()}
+                            />
                         </div>
                         : ''
                 }

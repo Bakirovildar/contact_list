@@ -44,7 +44,7 @@ function App() {
         <Main
             contacts={state.contacts}
             deleteContactHandle={deleteContactHandle}
-            setDeleteModalWindow={() => setDeleteModalWindow(true)}
+            setDeleteModalWindow={() => setDeleteModalWindow(!deleteModalWindow)}
             deleteModalWindow={deleteModalWindow}
         />
     </div>
