@@ -1,0 +1,41 @@
+.add {
+    min-width: 170px;
+    background: teal;
+    height: 40px;
+    border-radius: 25px;
+    padding-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 20px;
+}
+
+.cancel {
+    min-width: 170px;
+    background: orangered;
+    height: 40px;
+    border-radius: 25px;
+    padding-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 20px;
+}
+
+.cancel:hover {
+    background: orange;
+}
+
+.cancel:active {
+    background: rosybrown;
+}
+
+.add:hover {
+    background: lightblue;
+}
+
+.add:active {
+    background: darkgray;
+}
