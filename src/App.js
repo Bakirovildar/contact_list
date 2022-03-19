@@ -23,6 +23,10 @@ function App() {
         setShowModal(!showModal)
     }
 
+    const deleteContactHandle = (id) => {
+        console.log(id)
+    }
+
     return (
     <div className="App">
         <Header
@@ -32,7 +36,10 @@ function App() {
             setShowModal={() => setShowModal(!showModal)}
             showModal={showModal}
         />
-        <Main contacts={state.contacts}/>
+        <Main
+            contacts={state.contacts}
+            deleteContactHandle={deleteContactHandle}
+        />
     </div>
   );
 }

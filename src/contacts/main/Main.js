@@ -1,7 +1,9 @@
 import React from "react";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './Main.css'
 
-const Main = ({contacts}) => {
+const Main = ({contacts, deleteContactHandle}) => {
     return (
         <div className='main'>
             <div className='container-contacts'>
@@ -13,8 +15,13 @@ const Main = ({contacts}) => {
                         >
                             <div className='number'>{contact.number}</div>
                             <div className='phone'>{contact.name}</div>
-                            
-                            <span>у</span>
+                            <div className='icons'>
+                                <EditIcon className='edit'/>
+                                <DeleteIcon
+                                    className='delete'
+                                    // onClick={() => deleteContactHandle(contact.id)}
+                                />
+                            </div>
                         </div>
                     )
                 })}
