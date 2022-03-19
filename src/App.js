@@ -24,6 +24,10 @@ function App() {
     }
 
     const deleteContactHandle = (id) => {
+        const oldState = {...state}
+        const filterContacts = oldState.contacts.filter(contact => contact.id !== id)
+        const newContacts = {contacts: [...filterContacts]}
+        setState(newContacts)
     }
 
     return (
