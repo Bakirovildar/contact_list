@@ -19,7 +19,7 @@ const Main = ({contacts, deleteContactHandle}) => {
                                 <EditIcon className='edit'/>
                                 <DeleteIcon
                                     className='delete'
-                                    // onClick={() => deleteContactHandle(contact.id)}
+                                    onClick={() => deleteContactHandle(contact.id)}
                                 />
                             </div>
                         </div>

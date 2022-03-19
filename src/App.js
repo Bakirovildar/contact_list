@@ -24,7 +24,6 @@ function App() {
     }
 
     const deleteContactHandle = (id) => {
-        console.log(id)
     }
 
     return (
