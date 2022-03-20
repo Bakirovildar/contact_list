@@ -49,7 +49,7 @@ const Main = ({
                             <div className='icons'>
                                 <EditIcon
                                     className='edit'
-                                    onClick={() => showEditModalWindow(contact.id)}
+                                    onClick={() => showEditModalWindow(contact)}
                                 />
                                 <DeleteIcon
                                     className='delete'

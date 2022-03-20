@@ -1,7 +1,7 @@
 import React from "react";
 import './MyInput.css'
 
-const MyInput = ({title, onChange}) => {
+const MyInput = ({title, onChange, defaultValue}) => {
     return (
         <div>
             <input
@@ -9,6 +9,7 @@ const MyInput = ({title, onChange}) => {
                 className='my-input'
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={title}
+                defaultValue={defaultValue}
             />
         </div>
     )

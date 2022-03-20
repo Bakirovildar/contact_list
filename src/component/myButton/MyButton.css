@@ -1,6 +1,6 @@
 .add {
     min-width: 170px;
-    background: teal;
+    background: dodgerblue;
     height: 40px;
     border-radius: 25px;
     padding-bottom: 4px;
@@ -13,7 +13,7 @@
 
 .cancel {
     min-width: 170px;
-    background: orangered;
+    background: gainsboro;
     height: 40px;
     border-radius: 25px;
     padding-bottom: 4px;
@@ -25,7 +25,7 @@
 }
 
 .cancel:hover {
-    background: orange;
+    background: red;
 }
 
 .cancel:active {

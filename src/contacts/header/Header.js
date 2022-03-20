@@ -3,7 +3,7 @@ import './Header.css'
 import MyButton from "../../component/myButton/MyButton";
 import ModalWindow from "../../component/modalWindow/ModalWindow";
 
-const Header = ({isNew, showModal, setShowModal, numberValue, nameValue, addNewContactHandle}) => {
+const Header = ({isNew, showModal, setShowModal, numberValue, nameValue, addNewContactHandle, editItem}) => {
 
     return (
         <div className='header'>
@@ -15,6 +15,7 @@ const Header = ({isNew, showModal, setShowModal, numberValue, nameValue, addNewC
                         nameValue={nameValue}
                         numberValue={numberValue}
                         addNewContactHandle={addNewContactHandle}
+                        editItem={editItem}
                     />
                 </div>
                 : ''

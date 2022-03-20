@@ -32,7 +32,6 @@
 }
 
 .number {
-    border-bottom: 1px solid black;
     width: 180px;
     margin: 10px;
     height: 30px;
@@ -40,7 +39,6 @@
 }
 
 .phone {
-    border-bottom: 1px solid black;
     width: 180px;
     margin: 10px;
     height: 30px;
