@@ -1,7 +1,7 @@
 import React from "react";
 import './MyInput.css'
 
-const MyInput = ({title, onChange, defaultValue}) => {
+const MyInput = ({title, onChange, defaultValue, nameDirty, nameError, numberDirty, numberError}) => {
     return (
         <div>
             <input
@@ -11,6 +11,8 @@ const MyInput = ({title, onChange, defaultValue}) => {
                 placeholder={title}
                 defaultValue={defaultValue}
             />
+            {(numberDirty && numberError) && <div style={{color: 'red', fontSize: '14px'}}>{numberError}</div>}
+            {(nameDirty && nameError) && <div style={{color: 'red', fontSize: '14px'}}>{nameError}</div>}
         </div>
     )
 }

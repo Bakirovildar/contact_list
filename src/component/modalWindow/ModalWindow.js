@@ -3,7 +3,19 @@ import './ModalWindow.css'
 import MyButton from "../myButton/MyButton";
 import MyInput from "../myInput/MyInput";
 
-const ModalWindow = ({isNew, offShowModalWindow, numberValue, nameValue, addNewContactHandle, editItem}) => {
+const ModalWindow = ({
+                         isNew,
+                         offShowModalWindow,
+                         numberValue,
+                         nameValue,
+                         addNewContactHandle,
+                         editItem,
+                         nameDirty,
+                         nameError,
+                         numberDirty,
+                         numberError
+
+                     }) => {
 
     const initialState = isNew
         ? {
@@ -14,7 +26,7 @@ const ModalWindow = ({isNew, offShowModalWindow, numberValue, nameValue, addNewC
         : editItem
 
 
-    const [state, setState] = useState(initialState)
+    const [state] = useState(initialState)
 
     return (
         <div className='modalWindow'>
@@ -25,6 +37,8 @@ const ModalWindow = ({isNew, offShowModalWindow, numberValue, nameValue, addNewC
                         title='Номер телефона'
                         onChange={numberValue}
                         defaultValue={state.number}
+                        numberDirty={numberDirty}
+                        numberError={numberError}
                     />
                 </div>
                 <div>
@@ -32,11 +46,17 @@ const ModalWindow = ({isNew, offShowModalWindow, numberValue, nameValue, addNewC
                         title='Ваше имя'
                         onChange={nameValue}
                         defaultValue={state.name}
+                        nameDirty={nameDirty}
+                        nameError={nameError}
                     />
                 </div>
             </div>
             <div className='buttons'>
-                <MyButton title='Ok' cls='add' onClick={() => addNewContactHandle(isNew, state.number, state.name, editItem)}/>
+                {nameDirty || numberDirty === true
+                    ? <MyButton title='Ok' cls={'add'}/>
+                    : <MyButton title='Ok' cls='add'
+                                onClick={() => addNewContactHandle(isNew, state.number, state.name, editItem)}/>
+                }
                 <MyButton title='Отмена' cls='cancel' onClick={() => offShowModalWindow()}/>
             </div>
         </div>

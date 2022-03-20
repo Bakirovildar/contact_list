@@ -1,9 +1,21 @@
-import React, {useState} from "react";
+import React from "react";
 import './Header.css'
 import MyButton from "../../component/myButton/MyButton";
 import ModalWindow from "../../component/modalWindow/ModalWindow";
 
-const Header = ({isNew, showModal, setShowModal, numberValue, nameValue, addNewContactHandle, editItem}) => {
+const Header = ({
+                    isNew,
+                    showModal,
+                    offShowModalWindow,
+                    numberValue,
+                    nameValue,
+                    addNewContactHandle,
+                    editItem,
+                    nameDirty,
+                    nameError,
+                    numberDirty,
+                    numberError
+                }) => {
 
     return (
         <div className='header'>
@@ -11,19 +23,25 @@ const Header = ({isNew, showModal, setShowModal, numberValue, nameValue, addNewC
                 ? <div className='modalWind'>
                     <ModalWindow
                         isNew={isNew}
-                        offShowModalWindow={setShowModal}
+                        offShowModalWindow={offShowModalWindow}
                         nameValue={nameValue}
                         numberValue={numberValue}
                         addNewContactHandle={addNewContactHandle}
                         editItem={editItem}
+                        nameDirty={nameDirty}
+                        nameError={nameError}
+                        numberDirty={numberDirty}
+                        numberError={numberError}
                     />
                 </div>
                 : ''
             }
             <MyButton
-                onClick={setShowModal}
+                onClick={offShowModalWindow}
                 cls='add'
                 title='Добавить контакт'
+                nameDirty={nameDirty}
+                numberDirty={numberDirty}
             />
         </div>
     )

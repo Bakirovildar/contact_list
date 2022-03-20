@@ -17,6 +17,10 @@ function App() {
     const [isNew, setIsNew] = useState(false)
     const [valueName, setValueName] = useState('')
     const [valueNumber, setValueNumber] = useState('')
+    const [numberDirty, setNumberDirty] = useState(false)
+    const [nameDirty, setNameDirty] = useState(false)
+    const [numberError] = useState('Номер должен иметь 11 чисел')
+    const [nameError] = useState('Имя должен иметь больше 3 символов')
     const [editItem, setEditItem] = useState('')
 
     const addNewContactHandle = () => {
@@ -24,6 +28,8 @@ function App() {
         const newContacts = {contacts: [newContact, ...state.contacts]}
         setState(newContacts)
         setShowModal(!showModal)
+        setNameDirty(false)
+        setNumberDirty(false)
     }
 
     const deleteContactHandle = (id) => {
@@ -34,15 +40,18 @@ function App() {
         setDeleteModalWindow(false)
     }
 
-    const addContactShowModal = () => {
+    const offShowModalWindow = () => {
         setShowModal(!showModal)
         setIsNew(true)
+        setNameDirty(false)
+        setNumberDirty(false)
     }
 
     const showEditModalWindow = (contact) => {
         setShowModal(!showModal)
         setIsNew(false)
         setEditItem(contact)
+
     }
 
     const editContactHandler = (editItem) => {
@@ -62,16 +71,35 @@ function App() {
         }
     }
 
+    const validateName = (value) => {
+        setValueName(value)
+        value.length <= 3
+            ? setNameDirty(true)
+            : setNameDirty(false)
+    }
+
+    const validateNumber = (value) => {
+        setValueNumber(value)
+        const numValue = +value
+        value.length < 11 || value.length > 11 || isNaN(numValue)
+            ? setNumberDirty(true)
+            : setNumberDirty(false)
+    }
+
     return (
         <div className="App">
             <Header
-                numberValue={(value) => setValueNumber(value)}
-                nameValue={(value) => setValueName(value)}
+                numberValue={(value) => validateNumber(value)}
+                nameValue={(value) => validateName(value)}
                 addNewContactHandle={clickOkHandler}
-                setShowModal={addContactShowModal}
+                offShowModalWindow={offShowModalWindow}
                 isNew={isNew}
                 showModal={showModal}
                 editItem={editItem}
+                numberDirty={numberDirty}
+                nameDirty={nameDirty}
+                numberError={numberError}
+                nameError={nameError}
             />
             <Main
                 contacts={state.contacts}
