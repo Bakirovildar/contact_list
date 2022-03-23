@@ -4,18 +4,21 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import './Main.css'
 import MyButton from "../../component/myButton/MyButton";
 
-const Main = ({
-                  contacts,
-                  deleteContactHandle,
-                  setDeleteModalWindow,
-                  deleteModalWindow,
-                  showEditModalWindow
-              }) => {
+interface ChildProps {
+    contacts: any[]
+    deleteContactHandle: (id: string) => void
+    setDeleteModalWindow: () => void
+    deleteModalWindow: boolean
+    showEditModalWindow: (modal: boolean) => void
+
+}
+
+const Main: React.FC<ChildProps> = (props) => {
 
     const [idDelete, setIdDelete] = useState()
 
     const clickDeleteModal = (id) => {
-        setDeleteModalWindow()
+        props.setDeleteModalWindow()
         setIdDelete(id)
     }
 
@@ -23,22 +26,22 @@ const Main = ({
         <div className='main'>
             <div className='container-contacts'>
                 {
-                    deleteModalWindow === true
+                    props.deleteModalWindow === true
                         ? <div className='deleteModal'>
                             <MyButton
                                 title='Удалить'
                                 cls='cancel'
-                                onClick={() => deleteContactHandle(idDelete)}
+                                onClick={() => props.deleteContactHandle(idDelete)}
                             />
                             <MyButton
                                 title='Отмена'
                                 cls='add'
-                                onClick={() => setDeleteModalWindow()}
+                                onClick={() => props.setDeleteModalWindow()}
                             />
                         </div>
                         : ''
                 }
-                {contacts.map(contact => {
+                {props.contacts.map(contact => {
                     return (
                         <div
                             className='container-contact'
@@ -49,7 +52,7 @@ const Main = ({
                             <div className='icons'>
                                 <EditIcon
                                     className='edit'
-                                    onClick={() => showEditModalWindow(contact)}
+                                    onClick={() => props.showEditModalWindow(contact)}
                                 />
                                 <DeleteIcon
                                     className='delete'

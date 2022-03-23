@@ -5,9 +5,9 @@ interface ChildProps {
     title: string,
     onChange: (value: string) => void,
     defaultValue: string,
-    nameDirty: string,
+    nameDirty: boolean,
     nameError: string,
-    numberDirty: string,
+    numberDirty: boolean,
     numberError: string
 }
 
