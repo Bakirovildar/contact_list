@@ -9,13 +9,6 @@ function App() {
         contacts: []
     }
 
-    useEffect(() => {
-        fetch('http://localhost:8081/contacts')
-            .then(data => data.json())
-            .then(json => json.map(contact => ({...contact, id: contact.id})))
-            .then(db => data.contacts = [...db])
-    }, [])
-
     const [state, setState] = useState(data)
     const [showModal, setShowModal] = useState(false)
     const [deleteModalWindow, setDeleteModalWindow] = useState(false)
@@ -27,6 +20,13 @@ function App() {
     const [numberError] = useState('Номер должен иметь 11 чисел')
     const [nameError] = useState('Имя должен иметь больше 3 символов')
     const [editItem, setEditItem] = useState('')
+
+    useEffect(() => {
+        fetch('http://localhost:8081/contacts')
+            .then(data => data.json())
+            .then(json => json.map(contact => ({...contact, id: contact.id})))
+            .then(db => setState({contacts: [...db]}))
+    }, [])
 
     const addNewContactHandle = () => {
         const newContact = {name: valueName, number: valueNumber}
