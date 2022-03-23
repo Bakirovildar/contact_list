@@ -4,7 +4,7 @@ const getAllContacts = () => {
         .then(json => json.map(contact => ({...contact, id: contact.id})))
 }
 
-const deleteContact = id => {
+const deleteContact = (id:string) => {
     fetch(`http://localhost:8081/contacts/${id}`, {
         method: 'DELETE'
     }).then(r => {
@@ -12,7 +12,7 @@ const deleteContact = id => {
     })
 }
 
-const addContact = contact => {
+const addContact = (contact:any) => {
     console.log(JSON.stringify(contact))
     fetch('http://localhost:8081/contacts', {
         method: 'POST',
@@ -26,7 +26,7 @@ const addContact = contact => {
     })
 }
 
-const updateContact = contact => {
+const updateContact = (contact:any) => {
     fetch(`http://localhost:8081/contacts/${contact.id}`, {
         method: 'PUT',
         headers: {

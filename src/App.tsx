@@ -2,7 +2,7 @@ import './App.css';
 import Header from "./contacts/header/Header";
 import Main from "./contacts/main/Main"
 import React, {useEffect, useState} from "react";
-import {addContact, deleteContact, updateContact} from "./service/ContactService";
+import {addContact, deleteContact, getAllContacts, updateContact} from "./service/ContactService";
 
 function App() {
     const data = {
@@ -22,10 +22,7 @@ function App() {
     const [editItem, setEditItem] = useState<string>('')
 
     useEffect(() => {
-        fetch('http://localhost:8081/contacts')
-            .then(data => data.json())
-            .then(json => json.map(contact => ({...contact, id: contact.id})))
-            .then(db => setState({contacts: [...db]}))
+        getAllContacts().then(db => setState({contacts:[...db]}))
     }, [])
 
     const addNewContactHandle = () => {
