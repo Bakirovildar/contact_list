@@ -9,17 +9,17 @@ function App() {
         contacts: []
     }
 
-    const [state, setState] = useState(data)
-    const [showModal, setShowModal] = useState(false)
-    const [deleteModalWindow, setDeleteModalWindow] = useState(false)
-    const [isNew, setIsNew] = useState(false)
-    const [valueName, setValueName] = useState('')
-    const [valueNumber, setValueNumber] = useState('')
-    const [numberDirty, setNumberDirty] = useState(false)
-    const [nameDirty, setNameDirty] = useState(false)
-    const [numberError] = useState('Номер должен иметь 11 чисел')
-    const [nameError] = useState('Имя должен иметь больше 3 символов')
-    const [editItem, setEditItem] = useState('')
+    const [state, setState] = useState<any>(data)
+    const [showModal, setShowModal] = useState<boolean>(false)
+    const [deleteModalWindow, setDeleteModalWindow] = useState<boolean>(false)
+    const [isNew, setIsNew] = useState<boolean>(false)
+    const [valueName, setValueName] = useState<string>('')
+    const [valueNumber, setValueNumber] = useState<string>('')
+    const [numberDirty, setNumberDirty] = useState<boolean>(false)
+    const [nameDirty, setNameDirty] = useState<boolean>(false)
+    const [numberError] = useState<string>('Номер должен иметь 11 чисел')
+    const [nameError] = useState<string>('Имя должен иметь больше 3 символов')
+    const [editItem, setEditItem] = useState<string>('')
 
     useEffect(() => {
         fetch('http://localhost:8081/contacts')
@@ -38,7 +38,7 @@ function App() {
         setNumberDirty(false)
     }
 
-    const deleteContactHandle = (id) => {
+    const deleteContactHandle = (id:string) => {
         const oldState = {...state}
         const filterContacts = oldState.contacts.filter(contact => contact.id !== id)
         const newContacts = {contacts: [...filterContacts]}
@@ -54,14 +54,14 @@ function App() {
         setNumberDirty(false)
     }
 
-    const showEditModalWindow = (contact) => {
+    const showEditModalWindow = (contact: any) => {
         setShowModal(!showModal)
         setIsNew(false)
         setEditItem(contact)
-
+        console.log(contact)
     }
 
-    const editContactHandler = (editItem) => {
+    const editContactHandler = (editItem: any) => {
         const newState = {...state}
         const indexContact = state.contacts.indexOf(editItem)
         const newContact = state.contacts[indexContact] = {
@@ -75,7 +75,7 @@ function App() {
         setShowModal(false)
     }
 
-    const clickOkHandler = (isNew, number, name, editItem) => {
+    const clickOkHandler = (isNew:boolean, number:string, name:string, editItem: () => void) => {
         if (isNew) {
             addNewContactHandle()
         } else {
@@ -83,14 +83,14 @@ function App() {
         }
     }
 
-    const validateName = (value) => {
+    const validateName = (value:string) => {
         setValueName(value)
         value.length <= 3
             ? setNameDirty(true)
             : setNameDirty(false)
     }
 
-    const validateNumber = (value) => {
+    const validateNumber = (value:string) => {
         setValueNumber(value)
         const numValue = +value
         value.length < 11 || value.length > 11 || isNaN(numValue)
@@ -103,11 +103,11 @@ function App() {
             <Header
                 numberValue={(value) => validateNumber(value)}
                 nameValue={(value) => validateName(value)}
-                addNewContactHandle={clickOkHandler}
+                addNewContactHandle={() => clickOkHandler}
                 offShowModalWindow={offShowModalWindow}
                 isNew={isNew}
                 showModal={showModal}
-                editItem={editItem}
+                editItem={() => editItem}
                 numberDirty={numberDirty}
                 nameDirty={nameDirty}
                 numberError={numberError}
