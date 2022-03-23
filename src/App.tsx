@@ -58,7 +58,6 @@ function App() {
         setShowModal(!showModal)
         setIsNew(false)
         setEditItem(contact)
-        console.log(contact)
     }
 
     const editContactHandler = (editItem: any) => {
