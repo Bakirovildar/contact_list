@@ -2,7 +2,7 @@ import './App.css';
 import Header from "./contacts/header/Header";
 import Main from "./contacts/main/Main"
 import React, {useEffect, useState} from "react";
-import {addContact, deleteContact, getAllContacts, updateContact} from "./service/ContactService";
+import {addContact, deleteContact, updateContact} from "./service/ContactService";
 
 function App() {
     const data = {
@@ -64,7 +64,11 @@ function App() {
     const editContactHandler = (editItem) => {
         const newState = {...state}
         const indexContact = state.contacts.indexOf(editItem)
-        const newContact = state.contacts[indexContact] = {number: valueNumber || editItem.number, name: valueName || editItem.name, id: editItem.id}
+        const newContact = state.contacts[indexContact] = {
+            number: valueNumber || editItem.number,
+            name: valueName || editItem.name,
+            id: editItem.id
+        }
         newState.contacts.splice(indexContact, 1, newContact)
         updateContact(newContact)
         setState(newState)
