@@ -1,16 +1,21 @@
 import './App.css';
 import Header from "./contacts/header/Header";
 import Main from "./contacts/main/Main"
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {addContact, deleteContact, getAllContacts, updateContact} from "./service/ContactService";
 
 function App() {
     const data = {
-        contacts: [
-            {number: '8965584483', name: 'Ivan', id: 1},
-            {number: '8965584124', name: 'Danil', id: 2},
-            {number: '8912484434', name: 'Nikolay', id: 3},
-        ]
+        contacts: []
     }
+
+    useEffect(() => {
+        fetch('http://localhost:8081/contacts')
+            .then(data => data.json())
+            .then(json => json.map(contact => ({...contact, id: contact.id})))
+            .then(db => data.contacts = [...db])
+    }, [])
+
     const [state, setState] = useState(data)
     const [showModal, setShowModal] = useState(false)
     const [deleteModalWindow, setDeleteModalWindow] = useState(false)
@@ -24,10 +29,11 @@ function App() {
     const [editItem, setEditItem] = useState('')
 
     const addNewContactHandle = () => {
-        const newContact = {name: valueName, number: valueNumber, id: Date.now()}
+        const newContact = {name: valueName, number: valueNumber}
         const newContacts = {contacts: [newContact, ...state.contacts]}
         setState(newContacts)
         setShowModal(!showModal)
+        addContact(newContact)
         setNameDirty(false)
         setNumberDirty(false)
     }
@@ -36,6 +42,7 @@ function App() {
         const oldState = {...state}
         const filterContacts = oldState.contacts.filter(contact => contact.id !== id)
         const newContacts = {contacts: [...filterContacts]}
+        deleteContact(id)
         setState(newContacts)
         setDeleteModalWindow(false)
     }
@@ -57,8 +64,9 @@ function App() {
     const editContactHandler = (editItem) => {
         const newState = {...state}
         const indexContact = state.contacts.indexOf(editItem)
-        const newContact = state.contacts[indexContact] = {number: valueNumber, name: valueName, id: Date.now()}
+        const newContact = state.contacts[indexContact] = {number: valueNumber || editItem.number, name: valueName || editItem.name, id: editItem.id}
         newState.contacts.splice(indexContact, 1, newContact)
+        updateContact(newContact)
         setState(newState)
         setShowModal(false)
     }

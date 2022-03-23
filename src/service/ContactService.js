@@ -1,11 +1,11 @@
 const getAllContacts = () => {
-    return fetch('http://localhost:8080/contacts')
+    return fetch('http://localhost:8081/contacts')
         .then(data => data.json())
-        .then(json => json.map(contact => ({...contact, id: contact._id})))
+        .then(json => json.map(contact => ({...contact, id: contact.id})))
 }
 
 const deleteContact = id => {
-    fetch(`http://localhost:8080/contacts/${id}`, {
+    fetch(`http://localhost:8081/contacts/${id}`, {
         method: 'DELETE'
     }).then(r => {
         console.log(`successfully deleted contact with id = ${id}`)
@@ -14,7 +14,7 @@ const deleteContact = id => {
 
 const addContact = contact => {
     console.log(JSON.stringify(contact))
-    fetch('http://localhost:8080/contacts', {
+    fetch('http://localhost:8081/contacts', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
