@@ -29,7 +29,7 @@ function App() {
     }, [])
 
     const addNewContactHandle = () => {
-        const newContact = {name: valueName, number: valueNumber}
+        const newContact = {name: valueName, number: valueNumber, id: Date.now()}
         const newContacts = {contacts: [newContact, ...state.contacts]}
         setState(newContacts)
         setShowModal(!showModal)
