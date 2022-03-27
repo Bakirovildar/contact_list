@@ -7,36 +7,39 @@ import MyButton from "../../component/myButton/MyButton";
 interface ChildProps {
     contacts: any[]
     deleteContactHandle: (id: string) => void
-    setDeleteModalWindow: () => void
-    deleteModalWindow: boolean
     showEditModalWindow: (modal: boolean) => void
-
 }
 
 const Main: React.FC<ChildProps> = (props) => {
 
     const [idDelete, setIdDelete] = useState()
+    const [deleteModalWindow, setDeleteModalWindow] = useState<boolean>(false)
 
     const clickDeleteModal = (id) => {
-        props.setDeleteModalWindow()
+        setDeleteModalWindow(true)
         setIdDelete(id)
+    }
+
+    function onDeleteConfirmed() {
+        setDeleteModalWindow(false)
+        props.deleteContactHandle(idDelete)
     }
 
     return (
         <div className='main'>
             <div className='container-contacts'>
                 {
-                    props.deleteModalWindow === true
+                    deleteModalWindow === true
                         ? <div className='deleteModal'>
                             <MyButton
                                 title='Удалить'
                                 cls='cancel'
-                                onClick={() => props.deleteContactHandle(idDelete)}
+                                onClick={() => onDeleteConfirmed()}
                             />
                             <MyButton
                                 title='Отмена'
                                 cls='add'
-                                onClick={() => props.setDeleteModalWindow()}
+                                onClick={() => setDeleteModalWindow(false)}
                             />
                         </div>
                         : ''

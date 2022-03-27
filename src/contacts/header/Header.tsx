@@ -6,15 +6,9 @@ import ModalWindow from "../../component/modalWindow/ModalWindow";
 interface ChildProps {
     isNew: boolean
     showModal: boolean
-    offShowModalWindow: () => void
-    numberValue: (value: string) => void
-    nameValue: (value: string) => void
-    addNewContactHandle: () => void
-    editItem: () => void
-    nameDirty: boolean
-    nameError: string
-    numberDirty: boolean
-    numberError: string
+    toggleModalWindow: () => void
+    clickOkHandler: (isNew: boolean, contact: Contact) => void
+    editItem: Contact
 }
 
 const Header: React.FC<ChildProps> = (props) => {
@@ -25,21 +19,15 @@ const Header: React.FC<ChildProps> = (props) => {
                 ? <div className='modalWind'>
                     <ModalWindow
                         isNew={props.isNew}
-                        offShowModalWindow={props.offShowModalWindow}
-                        nameValue={props.nameValue}
-                        numberValue={props.numberValue}
-                        addNewContactHandle={props.addNewContactHandle}
+                        cancelClickHandler={props.toggleModalWindow}
+                        okClickHandler={props.clickOkHandler}
                         editItem={props.editItem}
-                        nameDirty={props.nameDirty}
-                        nameError={props.nameError}
-                        numberDirty={props.numberDirty}
-                        numberError={props.numberError}
                     />
                 </div>
                 : ''
             }
             <MyButton
-                onClick={props.offShowModalWindow}
+                onClick={props.toggleModalWindow}
                 cls='add'
                 title='Добавить контакт'
             />

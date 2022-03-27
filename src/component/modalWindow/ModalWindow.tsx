@@ -5,16 +5,9 @@ import MyInput from "../myInput/MyInput";
 
 interface ChildProps {
     isNew: boolean,
-    offShowModalWindow: () => void,
-    numberValue: (value: string) => void,
-    nameValue: (value: string) => void,
-    addNewContactHandle: () => void,
-    editItem: () => void,
-    nameDirty: boolean,
-    nameError: string,
-    numberDirty: boolean,
-    numberError: string,
-
+    cancelClickHandler: () => void,
+    okClickHandler: (isNew: boolean, contact: Contact) => void
+    editItem: Contact
 }
 
 const ModalWindow: React.FC<ChildProps> = (props) => {
@@ -27,47 +20,64 @@ const ModalWindow: React.FC<ChildProps> = (props) => {
         }
         : props.editItem
 
- // @ts-ignore
-    const [state] = useState(initialState)
+    const [state, setState] = useState<Contact>(initialState)
+    const [numberDirty, setNumberDirty] = useState<boolean>(false)
+    const [nameDirty, setNameDirty] = useState<boolean>(false)
+
+    const validateName = (value: string) => {
+        value.length <= 3
+            ? setNameDirty(true)
+            : setNameDirty(false)
+    }
+
+    const validateNumber = (value: string) => {
+        const numValue = +value
+        value.length < 11 || value.length > 11 || isNaN(numValue)
+            ? setNumberDirty(true)
+            : setNumberDirty(false)
+    }
+
+    const onNumberChange = number => {
+        validateNumber(number)
+        setState({...state, number: number})
+    }
+
+    const onNameChange = name => {
+        validateName(name)
+        setState({...state, name: name})
+    }
 
     return (
         <div className='modalWindow'>
             <h1>{props.isNew === true ? 'Введите данные' : 'Редактировать данные'}</h1>
             <div>
                 <div>
-                    {/*
-                    // @ts-ignore */}
                     <MyInput
                         title='Номер телефона'
-                        onChange={props.numberValue}
-
-                    // @ts-ignore
+                        onChange={onNumberChange}
                         defaultValue={state.number}
-                        numberDirty={props.numberDirty}
-                        numberError={props.numberError}
+                        isError={numberDirty}
+                        errorText='Номер должен иметь 11 чисел'
                     />
                 </div>
                 <div>
-                    {/*
-                     // @ts-ignore */}
                     <MyInput
                         title='Ваше имя'
-                        onChange={props.nameValue}
-                    // @ts-ignore
+                        onChange={onNameChange}
                         defaultValue={state.name}
-                        nameDirty={props.nameDirty}
-                        nameError={props.nameError}
-                    />
+                        isError={nameDirty}
+                        errorText='Имя должен иметь больше 3 символов'
+
+                />
                 </div>
             </div>
             <div className='buttons'>
-                {props.nameDirty || props.numberDirty === true
+                {nameDirty || numberDirty === true
                     ? <MyButton title='Ok' cls='add' onClick={() => ''}/>
                     : <MyButton title='Ok' cls='add'
-                    // @ts-ignore
-                                onClick={() => props.addNewContactHandle(props.isNew, state.number, state.name, props.editItem)}/>
+                                onClick={() => props.okClickHandler(props.isNew, state)}/>
                 }
-                <MyButton title='Отмена' cls='cancel' onClick={() => props.offShowModalWindow()}/>
+                <MyButton title='Отмена' cls='cancel' onClick={props.cancelClickHandler}/>
             </div>
         </div>
     )

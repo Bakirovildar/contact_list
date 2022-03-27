@@ -5,10 +5,8 @@ interface ChildProps {
     title: string,
     onChange: (value: string) => void,
     defaultValue: string,
-    nameDirty: boolean,
-    nameError: string,
-    numberDirty: boolean,
-    numberError: string
+    isError: boolean,
+    errorText: string,
 }
 
 const MyInput: React.FC<ChildProps> = (props) => {
@@ -21,8 +19,8 @@ const MyInput: React.FC<ChildProps> = (props) => {
                 placeholder={props.title}
                 defaultValue={props.defaultValue}
             />
-            {(props.numberDirty && props.numberError) && <div style={{color: 'red', fontSize: '14px'}}>{props.numberError}</div>}
-            {(props.nameDirty && props.nameError) && <div style={{color: 'red', fontSize: '14px'}}>{props.nameError}</div>}
+            {(props.isError && props.errorText) &&
+            <div style={{color: 'red', fontSize: '14px'}}>{props.errorText}</div>}
         </div>
     )
 }
